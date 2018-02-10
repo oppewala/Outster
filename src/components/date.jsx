@@ -1,12 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-const Date = ({description}) => (
-    <li>{description}</li>
+const Date = ({date}) => (
+    <li>{date.description}</li>
 )
 
 Date.propTypes = {
-    description: PropTypes.string.isRequired
+    date: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        description: PropTypes.string.isRequired
+    }).isRequired
 }
 
 export default Date
