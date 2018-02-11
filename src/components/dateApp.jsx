@@ -1,6 +1,7 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
-import DateCategory from './dateCategory'
+import DateCategory from './DateCategory'
+import DateInput from './DateInput'
 
 var dates = [
     { 
@@ -20,12 +21,32 @@ var dates = [
         ]
     }
 ]
+class DateApp extends React.Component {
+    constructor(props) {
+        super(props);
 
-const DateApp = () => (
-    <div>
-        <h1>Date App</h1>
-        {dates.map(datingCategory => (<DateCategory key={datingCategory.id} category={datingCategory} />))}
-    </div>
-)
+        this.state = {dates: dates};
+    }
+
+    handleSubmit(event) {
+        console.log('Form submitted', event, this.state)
+    }
+
+    renderCategories() {
+        return (this.state.dates.map(datingCategory => (<DateCategory key={datingCategory.id} category={datingCategory} />)))
+    }
+
+    render() {
+        const renderCategories = this.renderCategories();
+
+        return(
+            <div>
+                <h1>Date App</h1>
+                <DateInput />
+                { renderCategories }
+            </div>
+        )
+    }
+}
 
 export default DateApp

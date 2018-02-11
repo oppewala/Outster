@@ -1,13 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Date from './date'
+import DateList from './DateList'
 
 const DateCategory = ({ category }) => (
     <div>
         <h2>{category.description}</h2>
-        <ul>
-            {category.dates.map(date => (<Date key={date.id} date={date} />))}
-        </ul>
+        <DateList dates={category.dates} />
     </div>
 )
 
@@ -16,7 +14,7 @@ const DateCategory = ({ category }) => (
 // </ul>
 // <Date description='123' />
 
-DateCategory.PropTypes = {
+DateCategory.propTypes = {
     dateCategory: PropTypes.shape({
         id: PropTypes.number.isRequired,
         description: PropTypes.string.isRequired,

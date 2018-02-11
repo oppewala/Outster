@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import DateApp from './components/dateApp'
+import DateApp from './components/DateApp'
 
 class App extends Component {
 
