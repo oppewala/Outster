@@ -1,4 +1,5 @@
 import React from 'react'
+import { addDate } from '../actions'
 
 class DateInput extends React.Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class DateInput extends React.Component {
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
-  
+
     handleChange(event) {
       this.setState({
           [event.target.name]: event.target.value

@@ -2,12 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import DateList from './DateList'
 
-const DateCategory = ({ category }) => (
+const DateCategory = ({ category }) => {
+    console.log(category)
+    return(
     <div>
         <h2>{category.description}</h2>
         <DateList dates={category.dates} />
     </div>
-)
+)}
 
 // <ul>
 // {dates.map(datingCategory => ({datingCategory.dates.map(date => (<Date description={date.description}>)})}

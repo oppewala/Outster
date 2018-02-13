@@ -27,11 +27,32 @@ const initialState = {
     ],
     profileApp: [{ name: "Michelle" }]
 };
+let index = 0;
 
 function dateAppReducer(state = initialState.dateApp, action){
+    console.log('dateAppReducer:', action);
+    index++;
     switch (action.type) {
-        case 'ADD':
-            break;
+        case 'ADD_DATE_CATEGORY':
+            return [
+                ...state,
+                {
+                    id: index,
+                    description: action.category.description,
+                    dates: []
+                }
+            ]
+        case 'ADD_DATE':
+            var newState = [...state];
+            console.log(newState, action.date.categoryId)
+            newState[action.date.categoryId].dates = [ 
+                ...newState[action.date.categoryId].dates, 
+                {
+                    id: index,
+                    description: action.date.description
+                }
+            ]
+            return newState;
         default:
             break;
     }

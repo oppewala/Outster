@@ -2,6 +2,8 @@ import React from 'react'
 // import PropTypes from 'prop-types'
 import DateCategory from './DateCategory'
 import DateInput from './DateInput'
+import { connect } from 'react-redux';
+import { addDateCategory, addDate } from '../actions/index';
 
 var dates = [
     { 
@@ -21,32 +23,45 @@ var dates = [
         ]
     }
 ]
+const RenderCategories = ({ dates }) => {
+    console.log(dates)
+    return(
+    dates.map(datingCategory => (<DateCategory key={datingCategory.id} category={datingCategory} />))
+)}
+
 class DateApp extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {dates: dates};
+        console.log('DateApp props:', this.props)
+        this.state = this.props;
+        console.log('DateApp state:', this.state)
     }
 
     handleSubmit(event) {
         console.log('Form submitted', event, this.state)
     }
 
-    renderCategories() {
-        return (this.state.dates.map(datingCategory => (<DateCategory key={datingCategory.id} category={datingCategory} />)))
-    }
-
     render() {
-        const renderCategories = this.renderCategories();
-
         return(
             <div>
                 <h1>Date App</h1>
                 <DateInput />
-                { renderCategories }
+                <RenderCategories dates={this.state.dates} />
             </div>
         )
     }
 }
 
-export default DateApp
+const mapStateToProps = (state) => {
+    console.log('mapState:', state);
+    return { dates: state.dateAppReducer }
+}
+const mapDispatchToProps = (dispatch) => {
+    console.log('mapDispatch:', dispatch);
+    return {
+        addCategory: () => dispatch(addDateCategory),
+        addDate: () => dispatch(addDate)
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(DateApp)
