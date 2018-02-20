@@ -44,7 +44,7 @@ function dateAppReducer(state = initialState.dateApp, action){
             ]
         case 'ADD_DATE':
             var newState = [...state];
-            console.log(newState, action.date.categoryId)
+            console.log('REDUCER ADD_DATE:', newState, action.date.categoryId)
             newState[action.date.categoryId].dates = [ 
                 ...newState[action.date.categoryId].dates, 
                 {

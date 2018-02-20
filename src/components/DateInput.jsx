@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { addDate } from '../actions'
 
 class DateInput extends React.Component {
@@ -6,8 +7,10 @@ class DateInput extends React.Component {
       super(props);
       this.state = {
           id: 0,
-          description: ''
+          description: '',
+          categoryId: 1
         };
+        console.log('DateInput:', this.props)
   
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,8 +23,11 @@ class DateInput extends React.Component {
     }
   
     handleSubmit(event) {
-      console.log('A name was submitted: ', this.state);
+      console.log('A name was submitted: ', this.state, this.props.addDate);
       event.preventDefault();
+        this.props.addDate(this.state);
+        // this.props.onSubmit(this.state);
+      console.log('prevented')
     }
   
     render() {
@@ -31,10 +37,21 @@ class DateInput extends React.Component {
                     Description:
                     <input type="text" value={this.state.description} name="description" onChange={this.handleChange} />
                 </label>
+                <label>
+                    Category:
+                    <input type="text" value={this.state.description} name="description" onChange={this.handleChange} />
+                </label>
                 <input type="submit" value="Submit" />
             </form>
         )
     }
 }
 
-export default DateInput
+const mapDispatchToProps = (dispatch) => {
+    console.log('mapDispatchToProps - mapDispatch:', dispatch);
+    return {
+        // addCategory: () => dispatch(addDateCategory),
+        addDate: (date) => dispatch(addDate(date))
+    }
+}
+export default connect(null, mapDispatchToProps)(DateInput)

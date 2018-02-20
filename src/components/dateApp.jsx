@@ -5,24 +5,6 @@ import DateInput from './DateInput'
 import { connect } from 'react-redux';
 import { addDateCategory, addDate } from '../actions/index';
 
-var dates = [
-    { 
-        id: 0,
-        description: 'Out', 
-        dates: [
-            { id: 0, description: 'Movies' },
-            { id: 1, description: 'Bowling' }
-        ] 
-    },
-    {
-        id: 1,
-        description: 'Eating',
-        dates: [
-            { id: 2, description: 'Samurai' },
-            { id: 3, description: 'Universal' }
-        ]
-    }
-]
 const RenderCategories = ({ dates }) => {
     console.log(dates)
     return(
@@ -46,7 +28,7 @@ class DateApp extends React.Component {
         return(
             <div>
                 <h1>Date App</h1>
-                <DateInput />
+                <DateInput onSubmit={this.props.addDate} />
                 <RenderCategories dates={this.state.dates} />
             </div>
         )
@@ -57,11 +39,12 @@ const mapStateToProps = (state) => {
     console.log('mapState:', state);
     return { dates: state.dateAppReducer }
 }
-const mapDispatchToProps = (dispatch) => {
-    console.log('mapDispatch:', dispatch);
-    return {
-        addCategory: () => dispatch(addDateCategory),
-        addDate: () => dispatch(addDate)
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(DateApp)
+// const mapDispatchToProps = (dispatch) => {
+//     console.log('mapDispatch:', dispatch);
+//     return {
+//         addCategory: () => dispatch(addDateCategory),
+//         addDate: () => dispatch(addDate)
+//     }
+// }
+// export default connect(mapStateToProps, mapDispatchToProps)(DateApp)
+export default connect(mapStateToProps)(DateApp)
