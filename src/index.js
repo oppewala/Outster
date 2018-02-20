@@ -11,9 +11,9 @@ import { addDate, addDateCategory } from './actions'
 let store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 console.log(store.getState());
 
-store.subscribe(() => console.log(store.getState()));
-store.dispatch(addDateCategory({ id: 1, description: 'Result of add category action' }));
-store.dispatch(addDate({ categoryId: 1, description: 'Result of add date action' }));
+// store.subscribe(() => console.log('index.js - Subscribe Trigger:', store.getState()));
+// store.dispatch(addDateCategory({ id: 1, description: 'Result of add category action' }));
+// store.dispatch(addDate({ categoryId: 1, description: 'Result of add date action' }));
 
 render(
     <Provider store={store}>

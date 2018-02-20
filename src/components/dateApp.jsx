@@ -1,44 +1,37 @@
-import React from 'react'
+import React from "react";
 // import PropTypes from 'prop-types'
-import DateCategory from './DateCategory'
-import DateInput from './DateInput'
-import { connect } from 'react-redux';
-import { addDateCategory, addDate } from '../actions/index';
+import DateCategory from "./DateCategory";
+import DateInput from "./DateInput";
+import { connect } from "react-redux";
+import { addDateCategory, addDate } from "../actions/index";
 
 const RenderCategories = ({ dates }) => {
-    console.log(dates)
-    return(
-    dates.map(datingCategory => (<DateCategory key={datingCategory.id} category={datingCategory} />))
-)}
+  return dates.map(datingCategory => (
+    <DateCategory key={datingCategory.id} category={datingCategory} />
+  ));
+};
 
 class DateApp extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
+    this.state = this.props;
+  }
 
-        console.log('DateApp props:', this.props)
-        this.state = this.props;
-        console.log('DateApp state:', this.state)
-    }
-
-    handleSubmit(event) {
-        console.log('Form submitted', event, this.state)
-    }
-
-    render() {
-        return(
-            <div>
-                <h1>Date App</h1>
-                <DateInput onSubmit={this.props.addDate} />
-                <RenderCategories dates={this.state.dates} />
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <h1>Date App</h1>
+        <RenderCategories dates={this.state.dates} />
+      </div>
+    );
+  }
 }
+// <DateInput /> - This used to be in the render above
 
-const mapStateToProps = (state) => {
-    console.log('mapState:', state);
-    return { dates: state.dateAppReducer }
-}
+const mapStateToProps = state => {
+  console.log("DateApp - mapStateToProps:", state);
+  return { dates: state.dateAppReducer };
+};
 // const mapDispatchToProps = (dispatch) => {
 //     console.log('mapDispatch:', dispatch);
 //     return {
@@ -47,4 +40,4 @@ const mapStateToProps = (state) => {
 //     }
 // }
 // export default connect(mapStateToProps, mapDispatchToProps)(DateApp)
-export default connect(mapStateToProps)(DateApp)
+export default connect(mapStateToProps)(DateApp);
