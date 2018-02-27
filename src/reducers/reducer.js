@@ -12,25 +12,56 @@ const initialState = {
             id: 0,
             description: 'Out', 
             dates: [
-                { id: 0, description: 'Movies' },
-                { id: 1, description: 'Bowling' }
+                { 
+                    id: 0, 
+                    description: 'Ice Skating',
+                    addedBy: 0,
+                    addedOn: new Date(2018, 1, 1),
+                    notes: 'Fun activity, but a lot of pressure for Michelle. Good for a second or third date, as people get really close'
+                },
+                { 
+                    id: 1, 
+                    description: 'Bowling', 
+                    addedBy: 0,
+                    addedOn: new Date(2018, 1, 1)
+                }
             ] 
         },
         {
             id: 1,
             description: 'Eating',
             dates: [
-                { id: 2, description: 'Samurai' },
-                { id: 3, description: 'Universal' }
+                { 
+                    id: 2, 
+                    description: 'Samurai',
+                    addedBy: 1,
+                    addedOn: new Date(2018, 1, 1)
+                },
+                { 
+                    id: 3, 
+                    description: 'Universal',
+                    addedBy: 0,
+                    addedOn: new Date(2018, 1, 1)
+                }
             ]
         }
     ],
-    profileApp: [{ name: "Michelle" }]
+    filter: 'SHOW_ALL',
+    users: [
+        {
+            id: 0,
+            name: 'Arend Oppewal'
+        },
+        {
+            id: 1,
+            name: 'Michelle Suprapto'
+        }
+    ]
 };
 let index = 0;
 
 function datesReducer(state = initialState.dates, action){
-    console.log('dateAppReducer:', action);
+    console.log('datesReducer:', action);
     index++;
     switch (action.type) {
         case 'ADD_DATE_CATEGORY':
@@ -57,13 +88,24 @@ function datesReducer(state = initialState.dates, action){
     }
     return state;
 }
-function profileReducer(state = initialState.profileApp, action) {
+function filterReducer(state = initialState.filter, action) {
+    console.log('filterReducer', action);
+    switch(action.type){
+        case 'SHOW_ALL':
+            return 'SHOW_ALL';
+        case 'LIKED':
+            return 'LIKED';
+        case 'DISLIKED':
+            return 'DISLIKED';
+        default:
+            break;
+    }
     return state;
 }
 
 const rootReducer = combineReducers({
     datesReducer,
-    profileReducer
+    filterReducer
 });
 
 export default rootReducer;

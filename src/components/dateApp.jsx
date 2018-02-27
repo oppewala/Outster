@@ -2,10 +2,11 @@ import React from "react";
 // import PropTypes from 'prop-types'
 import DateCategory from "./DateCategory";
 import { connect } from "react-redux";
+import DateModal from "./DateModal";
 
-const RenderCategories = ({ dates }) => {
+const RenderCategories = ({ dates, openModal }) => {
   return dates.map(datingCategory => (
-    <DateCategory key={datingCategory.id} category={datingCategory} />
+    <DateCategory key={datingCategory.id} openModal={openModal} category={datingCategory} />
   ));
 };
 
@@ -14,20 +15,33 @@ class DateApp extends React.Component {
     super(props);
     console.log('DateApp props:', this.props);
     this.state = {
-      dates: this.props.dates
+      categories: this.props.dates,
+      selectedDate: null
     };
+
+    this.openModal = this.openModal.bind(this);
+    console.log(this.openModal);
   }
+
+  openModal(dateId, categoryId) {
+    var category = this.state.categories.find(c => c.id == categoryId);
+    var date = category.dates.find(d => d.id == dateId);
+
+    this.setState({
+      selectedDate: date
+    });
+  };
 
   render() {
     return (
       <div>
         <h1>Date App</h1>
-        <RenderCategories dates={this.state.dates} />
+        <DateModal date={this.state.selectedDate} />
+        <RenderCategories openModal={this.openModal} dates={this.state.categories} />
       </div>
     );
   }
 }
-// <DateInput /> - This used to be in the render above
 
 const mapStateToProps = state => {
   console.log("DateApp - mapStateToProps:", state);

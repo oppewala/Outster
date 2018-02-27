@@ -3,11 +3,14 @@ import PropTypes from 'prop-types'
 import DateList from './DateList'
 import DateInput from './DateInput';
 
-const DateCategory = ({ category }) => {
+const DateCategory = ({ category, openModal }) => {
+    var openModalCategory = (e) => {
+        openModal(e.target.name, category.id);
+    };
     return(
     <div>
         <h2>{category.description}</h2>
-        <DateList dates={category.dates} />
+        <DateList dates={category.dates} openModal={openModalCategory} />
         <DateInput category={category} />
     </div>
 )}
