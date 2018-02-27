@@ -12,7 +12,10 @@ const RenderCategories = ({ dates }) => {
 class DateApp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this.props;
+    console.log('DateApp props:', this.props);
+    this.state = {
+      dates: this.props.dates
+    };
   }
 
   render() {
@@ -28,7 +31,7 @@ class DateApp extends React.Component {
 
 const mapStateToProps = state => {
   console.log("DateApp - mapStateToProps:", state);
-  return { dates: state.dateAppReducer };
+  return { dates: state.datesReducer };
 };
 // const mapDispatchToProps = (dispatch) => {
 //     console.log('mapDispatch:', dispatch);

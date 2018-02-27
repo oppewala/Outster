@@ -7,7 +7,7 @@ const initialState = {
     //     { In: ["The Simpsons", "Last Airbender"] },
     //     { Eating: ["Universal", "400 Gradi"]}
     // ],
-    dateApp: [
+    dates: [
         { 
             id: 0,
             description: 'Out', 
@@ -29,7 +29,7 @@ const initialState = {
 };
 let index = 0;
 
-function dateAppReducer(state = initialState.dateApp, action){
+function datesReducer(state = initialState.dates, action){
     console.log('dateAppReducer:', action);
     index++;
     switch (action.type) {
@@ -62,7 +62,7 @@ function profileReducer(state = initialState.profileApp, action) {
 }
 
 const rootReducer = combineReducers({
-    dateAppReducer,
+    datesReducer,
     profileReducer
 });
 
