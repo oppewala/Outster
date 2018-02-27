@@ -1,9 +1,7 @@
 import React from "react";
 // import PropTypes from 'prop-types'
 import DateCategory from "./DateCategory";
-import DateInput from "./DateInput";
 import { connect } from "react-redux";
-import { addDateCategory, addDate } from "../actions/index";
 
 const RenderCategories = ({ dates }) => {
   return dates.map(datingCategory => (
