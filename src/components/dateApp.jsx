@@ -25,7 +25,10 @@ class DateApp extends React.Component {
 
   openModal(dateId, categoryId) {
     var category = this.state.categories.find(c => c.id == categoryId);
+    if(!category || !category.dates) console.log('openModal:', 'Failed to find category with dates', categoryId);
+
     var date = category.dates.find(d => d.id == dateId);
+    if (!date) console.log('openModal:', 'Failed to find date', dateId, categoryId)
 
     this.setState({
       selectedDate: date
