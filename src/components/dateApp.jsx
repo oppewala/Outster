@@ -3,6 +3,7 @@ import React from "react";
 import DateCategory from "./DateCategory";
 import { connect } from "react-redux";
 import DateModal from "./DateModal";
+import { openDateModal } from "../actions/dateModalActions"
 
 const RenderCategories = ({ dates, openModal }) => {
   return dates.map(datingCategory => (
@@ -30,6 +31,8 @@ class DateApp extends React.Component {
     var date = category.dates.find(d => d.id == dateId);
     if (!date) console.log('openModal:', 'Failed to find date', dateId, categoryId)
 
+    openDateModal(dateId);
+
     this.setState({
       selectedDate: date
     });
@@ -50,12 +53,10 @@ const mapStateToProps = state => {
   console.log("DateApp - mapStateToProps:", state);
   return { dates: state.datesReducer };
 };
-// const mapDispatchToProps = (dispatch) => {
-//     console.log('mapDispatch:', dispatch);
-//     return {
-//         addCategory: () => dispatch(addDateCategory),
-//         addDate: () => dispatch(addDate)
-//     }
-// }
-// export default connect(mapStateToProps, mapDispatchToProps)(DateApp)
-export default connect(mapStateToProps)(DateApp);
+const mapDispatchToProps = (dispatch) => {
+    console.log('mapDispatch:', dispatch);
+    return {
+      openDateModal: (date) => dispatch(openDateModal(date))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(DateApp);

@@ -1,12 +1,28 @@
 import React from 'react'
+import { connect } from "react-redux";
+import { closeDateModal } from "../actions/dateModalActions";
 
-const DateModal = ({ date }) => {
-    if (!date){
-        return <div style={{display: 'hidden'}}></div>
+class DateModal extends React.Component {
+  constructor(props) {
+    super(props);
+
+    console.log('DateModal props:', this.props);    
+
+    this.state = {
+        display: false,
+        date: { id: 123, description: 'fake date' }
     }
-    return (<div>
+  }
+
+    // const DateModal = ({ date }) => {
+    // if (!date){
+    //     return <div style={{display: 'hidden'}}></div>
+    // }
+    render() {
+        return (<div style={{display: this.state.display ? 'block' : 'hidden'}}>
+        <a name={this.state.date.id} onClick={closeDateModal} href="#">Close</a>
         <p>This is the modal</p>
-        <p>{date.description}</p>
+        <p>{this.state.date.description}</p>
         <p>LINK</p>
         <p>Created by: USER</p>
         <p>Added on: DATETIME</p>
@@ -17,6 +33,17 @@ const DateModal = ({ date }) => {
             </ul>
         </div>
     </div>)
+    }
 }
 
-export default DateModal
+const mapDispatchToProps = dispatch => {
+    // console.log("mapDispatchToProps - mapDispatch:", dispatch);
+    return {
+        closeDateModal: () => dispatch(closeDateModal())
+    };
+};
+const mapStateToProps = state => {
+    console.log(state);
+    return { dates: state.datesReducer, selectedDate: state.dateModalReducer };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(DateModal);

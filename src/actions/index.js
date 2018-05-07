@@ -12,3 +12,17 @@ export const addDateCategory = (category) => {
         category
     }
 }
+export const editDate = (date) => {
+    console.log('ACTION CALLED - editing date:', date);
+    return {
+        type: 'EDIT_DATE',
+        date
+    }
+}
+export const closeDateModal = (dateId) => {
+    console.log('ACTION CALLED - closing date modal:', dateId);
+    return {
+        type: 'CLOSE_DATE_MODAL',
+        dateId
+    }
+}

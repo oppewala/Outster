@@ -47,6 +47,7 @@ const initialState = {
         }
     ],
     filter: 'SHOW_ALL',
+    selectedDate: 'HIDDEN',
     users: [
         {
             id: 0,
@@ -83,6 +84,23 @@ function datesReducer(state = initialState.dates, action){
                 }
             ]
             return newState;
+        case 'EDIT_DATE':
+            var newState = [...state];
+            var editDate = newState[action.date.categoryId].dates[action.date.id];
+            editDate = { ...action.date }
+            return newState;
+        default:
+            break;
+    }
+    return state;
+}
+function dateModalReducer(state = initialState.selectedDate, action) {
+    console.log('dateModalReducer', action);
+    switch(action.type){
+        case 'HIDDEN':
+            return 'HIDDEN';
+        case 'SHOW':
+            return action.action;
         default:
             break;
     }
@@ -105,7 +123,8 @@ function filterReducer(state = initialState.filter, action) {
 
 const rootReducer = combineReducers({
     datesReducer,
-    filterReducer
+    filterReducer,
+    dateModalReducer
 });
 
 export default rootReducer;
