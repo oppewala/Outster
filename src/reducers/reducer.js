@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 // import { dateListReducer, profileReducer } from ""
 
 const initialState = {
@@ -8,37 +8,38 @@ const initialState = {
     //     { Eating: ["Universal", "400 Gradi"]}
     // ],
     dates: [
-        { 
+        {
             id: 0,
-            description: 'Out', 
+            description: 'Out',
             dates: [
-                { 
-                    id: 0, 
+                {
+                    id: 0,
                     description: 'Ice Skating',
                     addedBy: 0,
                     addedOn: new Date(2018, 1, 1),
-                    notes: 'Fun activity, but a lot of pressure for Michelle. Good for a second or third date, as people get really close'
+                    notes:
+                        'Fun activity, but a lot of pressure for Michelle. Good for a second or third date, as people get really close'
                 },
-                { 
-                    id: 1, 
-                    description: 'Bowling', 
+                {
+                    id: 1,
+                    description: 'Bowling',
                     addedBy: 0,
                     addedOn: new Date(2018, 1, 1)
                 }
-            ] 
+            ]
         },
         {
             id: 1,
             description: 'Eating',
             dates: [
-                { 
-                    id: 2, 
+                {
+                    id: 2,
                     description: 'Samurai',
                     addedBy: 1,
                     addedOn: new Date(2018, 1, 1)
                 },
-                { 
-                    id: 3, 
+                {
+                    id: 3,
                     description: 'Universal',
                     addedBy: 0,
                     addedOn: new Date(2018, 1, 1)
@@ -61,7 +62,7 @@ const initialState = {
 };
 let index = 0;
 
-function datesReducer(state = initialState.dates, action){
+function datesReducer(state = initialState.dates, action) {
     console.log('datesReducer:', action);
     index++;
     switch (action.type) {
@@ -73,21 +74,22 @@ function datesReducer(state = initialState.dates, action){
                     description: action.category.description,
                     dates: []
                 }
-            ]
+            ];
         case 'ADD_DATE':
             var newState = [...state];
-            newState[action.date.categoryId].dates = [ 
-                ...newState[action.date.categoryId].dates, 
+            newState[action.date.categoryId].dates = [
+                ...newState[action.date.categoryId].dates,
                 {
                     id: index,
                     description: action.date.description
                 }
-            ]
+            ];
             return newState;
         case 'EDIT_DATE':
             var newState = [...state];
-            var editDate = newState[action.date.categoryId].dates[action.date.id];
-            editDate = { ...action.date }
+            var editDate =
+                newState[action.date.categoryId].dates[action.date.id];
+            editDate = { ...action.date };
             return newState;
         default:
             break;
@@ -95,12 +97,12 @@ function datesReducer(state = initialState.dates, action){
     return state;
 }
 function dateModalReducer(state = initialState.selectedDate, action) {
-    console.log('dateModalReducer', action);
-    switch(action.type){
+    console.log('dateModalReducer', state, action);
+    switch (action.type) {
         case 'HIDDEN':
             return 'HIDDEN';
         case 'SHOW':
-            return action.action;
+            return action.dateId;
         default:
             break;
     }
@@ -108,7 +110,7 @@ function dateModalReducer(state = initialState.selectedDate, action) {
 }
 function filterReducer(state = initialState.filter, action) {
     console.log('filterReducer', action);
-    switch(action.type){
+    switch (action.type) {
         case 'SHOW_ALL':
             return 'SHOW_ALL';
         case 'LIKED':
